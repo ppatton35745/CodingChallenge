@@ -9,7 +9,7 @@ export const completeTodo = (todo) => {
     return (dispatch) => (
         todoSvc.updateTodo(todo)
             .then(() => {
-                return dispatch({type: TODO_COMPLETE_CHANGE, isComplete: todo.isComplete, id: todo.id })
+                return dispatch({ type: TODO_COMPLETE_CHANGE, isComplete: todo.isComplete, id: todo.id })
             })
     );
 };
@@ -18,7 +18,7 @@ export const getTodos = () => {
     return (dispatch) => (
         todoSvc.getTodos()
             .then(todos => {
-                return dispatch({type: GET_TODOS_SUCCESS, todos })
+                return dispatch({ type: GET_TODOS_SUCCESS, todos })
             })
     );
 }
@@ -26,8 +26,8 @@ export const getTodos = () => {
 export const addTodo = (todo) => {
     return (dispatch) => {
         todoSvc.addTodo(todo)
-        .then(() => {
-            return dispatch({type: ADD_TODO_SUCCESS, todo })
-        })
+            .then((newTodo) => {
+                return dispatch({ type: ADD_TODO_SUCCESS, todo: newTodo })
+            })
     }
 }
