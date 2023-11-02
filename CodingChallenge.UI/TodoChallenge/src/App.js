@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import TodoList from "./components/todo/TodoList";
+import {connect} from "react-redux";
 import "./App.scss";
 import './button.scss';
+import { addTodo } from './todoActions';
 
 class App extends Component {
   constructor(props) {
@@ -30,4 +32,12 @@ class App extends Component {
   )}
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  todos: state.todos ?? []
+});
+const mapDispatchToProps = (dispatch) => ({
+  onAddTodo: (text) => dispatch(addTodo(text)),
+
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -1,4 +1,4 @@
-import {GET_TODOS_SUCCESS, TODO_COMPLETE_CHANGE, TODO_TEXT_CHANGE} from "./todoActions";
+import {ADD_TODO_SUCCESS, GET_TODOS_SUCCESS, TODO_COMPLETE_CHANGE, TODO_TEXT_CHANGE} from "./todoActions";
 
 export const reducer = (state, action) => {
     switch (action.type) {
@@ -19,6 +19,12 @@ export const reducer = (state, action) => {
                 ...state,
                 todos: action.todos
             };
+        }
+        case ADD_TODO_SUCCESS: {
+            return {
+                ...state,
+                todos: [...state.todos, action.todo]
+            }
         }
         default: return state;
     }
