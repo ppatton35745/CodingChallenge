@@ -20,6 +20,7 @@ const TodoAdd = ({ onAddTodo }) => {
     }, [newTodoText])
 
     // const [newTodoType, setNewTodoType] = useState('Optional');
+    // test change
     return (
         <>
             <input type="text" value={newTodoText} onChange={(e) => setNewTodoText(e.target.value)}></input>
