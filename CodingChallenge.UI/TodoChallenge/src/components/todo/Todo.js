@@ -1,54 +1,64 @@
-import React, {useState} from 'react';
-import {TodoModel} from "../../TodoModel";
+import React, { useState } from 'react';
+import { TodoModel } from "../../TodoModel";
 import PropTypes from "prop-types";
 import './todo.scss';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
 
 const Todo = (props) => {
-    const [editing, setStateEditing] =  useState(false);
-    const [editingText, setStateEditText] = useState(props.todo.text);
+    const [isEditing, setIsEditing] = useState(false);
+    const [editingText, setEditingText] = useState(props.todo.text);
 
 
     const toggleComplete = () => {
-        props.onCompleteChange({...props.todo, isComplete: !props.todo.isComplete});
+        props.onCompleteChange({ ...props.todo, isComplete: !props.todo.isComplete });
     }
 
     const toggleEditText = () => {
-        setStateEditing(!editing);
+        setIsEditing(!isEditing);
     }
 
     const saveText = () => {
-        if (!editing) return;
+        if (!isEditing) return;
         props.onTextChange(editingText, props.todo.id);
         toggleEditText();
     };
 
     const onChangeEditText = (event) => {
-        setStateEditText(event.target.value);
+        setEditingText(event.target.value);
     }
 
-    const displayText = () => {
-        if (editing)
-        {
-            return <input onChange={onChangeEditText} value={editingText}></input>
-        }
-        else
-        {
-            return props.todo.text;
-        }
-    }
     const getClassName = () => {
-        const {isComplete} = props.todo;
+        const { isComplete } = props.todo;
         return `todo-item ${isComplete ? 'complete' : 'incomplete'}`;
+    }
+
+    const EditModeTodo = () => {
+        return (
+            <>
+                <input onChange={onChangeEditText} value={editingText}></input>
+                <IconButton onClick={saveText} className={"btn--default btn--base"}><CheckCircleOutlineIcon /></IconButton>
+                <IconButton onClick={toggleEditText} className={"btn--default btn--destructive"}><CancelOutlinedIcon /></IconButton>
+            </>
+        )
+    }
+
+    const ReadOnlyModeTodo = () => {
+        return (
+            <>
+                {props.todo.text}
+                <IconButton onClick={toggleComplete} className={"btn--default btn--destructive"}><DeleteIcon /></IconButton>
+                <IconButton onClick={toggleEditText} className={"btn--default btn--base"}><ModeEditIcon /></IconButton>
+            </>
+        )
     }
 
     return (
         <div className={getClassName()}>
-            {displayText()}
-            <button onClick={toggleComplete} className={"btn--default btn--destructive"}>Toggle Complete</button>
-            {editing
-                ? <button onClick={saveText} className={"btn--default btn--base"}>Save</button>
-                : <button onClick={toggleEditText} className={"btn--default btn--base"}>Edit</button>
-            }
+            {isEditing ? <EditModeTodo /> : <ReadOnlyModeTodo />}
         </div>
     )
 }
