@@ -1,26 +1,33 @@
-import React, { useState } from 'react';
-import { connect } from "react-redux";
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from "react-redux";
 import { addTodo } from '../../todoActions';
+import todoSvc from "../../TodoService";
 
 const TodoAdd = ({ onAddTodo }) => {
-    const [newTodo, setNewTodo] = useState('');
+    const dispatch = useDispatch();
+
+    const [newTodoText, setNewTodoText] = useState('');
+
+    useEffect(() => {
+        todoSvc.getPendingTodo().then(todo => {
+            if (todo)
+                setNewTodoText(todo);
+        })
+    }, [])
+
+    useEffect(() => {
+        todoSvc.updatePendingTodo(newTodoText);
+    }, [newTodoText])
+
     // const [newTodoType, setNewTodoType] = useState('Optional');
     return (
         <>
-            <input type="text" value={newTodo} onChange={(e) => setNewTodo(e.target.value)}></input>
+            <input type="text" value={newTodoText} onChange={(e) => setNewTodoText(e.target.value)}></input>
             <button className={"btn--default"} onClick={() => {
-                console.log('newTodo');
-                onAddTodo(newTodo)
+                dispatch(addTodo(newTodoText));
             }}>Add</button>
         </>
     )
 }
 
-const mapStateToProps = (state) => ({});
-
-const mapDispatchToProps = (dispatch) => ({
-    onAddTodo: (text) => dispatch(addTodo(text)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(TodoAdd);
-
+export default TodoAdd;
