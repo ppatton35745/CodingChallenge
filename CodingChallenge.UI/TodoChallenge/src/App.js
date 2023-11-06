@@ -5,13 +5,16 @@ import "./App.scss";
 import './button.scss';
 
 import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
 
 const App = () => {
 
   return (
     <Container maxWidth="md">
-      <TodoAdd />
-      <TodoList />
+      <Box className="App" sx={{ flexDirection: 'column' }}>
+        <TodoAdd />
+        <TodoList />
+      </Box>
     </Container>
 
   )
