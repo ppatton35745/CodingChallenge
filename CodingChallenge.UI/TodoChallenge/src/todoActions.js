@@ -3,7 +3,7 @@ import todoSvc from "./TodoService";
 export const TODO_TEXT_CHANGE = "TODO_ACTION/TODO_TEXT_CHANGE";
 export const TODO_COMPLETE_CHANGE = "TODO_ACTION/TODO_COMPLETE_CHANGE";
 export const GET_TODOS_SUCCESS = "TODO_ACTION/GET_TODOS_SUCCESS";
-export const ADD_TODO_SUCCESS = "TODO_ACTION/ADD_TODO_SUCCESS";
+export const ADD_TODO = "TODO_ACTION/ADD_TODO";
 
 export const completeTodo = (todo) => {
     return (dispatch) => (
@@ -27,7 +27,7 @@ export const addTodo = (todoText, date) => {
     return (dispatch) => {
         todoSvc.addTodo(todoText, date)
             .then((newTodo) => {
-                return dispatch({ type: ADD_TODO_SUCCESS, todo: newTodo })
+                return dispatch({ type: ADD_TODO, todo: newTodo })
             })
     }
 }
