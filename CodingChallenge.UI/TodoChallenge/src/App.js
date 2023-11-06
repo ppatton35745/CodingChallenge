@@ -11,7 +11,7 @@ import Box from '@mui/material/Box';
 const App = () => {
 
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="sm">
       <Box className="App" sx={{ display: 'flex', flexDirection: 'column' }}>
         <h1 style={{ margin: 'auto', textAlign: 'center' }}>
           Todo App
