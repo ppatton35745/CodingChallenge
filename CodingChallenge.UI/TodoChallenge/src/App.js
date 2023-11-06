@@ -4,13 +4,16 @@ import TodoAdd from "./components/todo/TodoAdd";
 import "./App.scss";
 import './button.scss';
 
+import Container from '@mui/material/Container';
+
 const App = () => {
 
   return (
-    <div className="App">
+    <Container maxWidth="md">
       <TodoAdd />
       <TodoList />
-    </div>
+    </Container>
+
   )
 }
 
