@@ -7,6 +7,7 @@ const TodoAdd = ({ onAddTodo }) => {
     const dispatch = useDispatch();
 
     const [newTodoText, setNewTodoText] = useState('');
+    const [newTodoDate, setNewTodoDate] = useState('');
 
     useEffect(() => {
         todoSvc.getPendingTodo().then(todo => {
@@ -19,16 +20,13 @@ const TodoAdd = ({ onAddTodo }) => {
         todoSvc.updatePendingTodo(newTodoText);
     }, [newTodoText])
 
-    const handleThisPlease = (value) => {
-        console.log("handler: ", value);
-    }
-
     return (
         <>
             <input type="text" value={newTodoText} onChange={(e) => setNewTodoText(e.target.value)}></input>
-            <input type="date" onChange={(e) => handleThisPlease(e.target.value)}></input>
+            <input type="date" value={newTodoDate} onChange={(e) => setNewTodoDate(e.target.value)}></input>
             <button className={"btn--default"} onClick={() => {
-                dispatch(addTodo(newTodoText));
+                console.log("newTodoDate: ", newTodoDate);
+                dispatch(addTodo(newTodoText, newTodoDate));
             }}>Add</button>
         </>
     )

@@ -27,10 +27,10 @@ const svc = {
         return Promise.resolve(todo);
     },
 
-    addTodo: async text => {
+    addTodo: async (text, dueDate) => {
         const todos = (await svc.getTodos());
         const nextId = Number(new Date());
-        const todo = { id: nextId, text, isComplete: false };
+        const todo = { id: nextId, text, isComplete: false, dueDate: dueDate };
         localStorage.setItem(TODOS_KEY, JSON.stringify([...todos, todo]));
         return Promise.resolve(todo);
     },

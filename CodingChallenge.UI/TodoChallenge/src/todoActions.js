@@ -23,9 +23,9 @@ export const getTodos = () => {
     );
 }
 
-export const addTodo = (todo) => {
+export const addTodo = (todoText, date) => {
     return (dispatch) => {
-        todoSvc.addTodo(todo)
+        todoSvc.addTodo(todoText, date)
             .then((newTodo) => {
                 return dispatch({ type: ADD_TODO_SUCCESS, todo: newTodo })
             })
