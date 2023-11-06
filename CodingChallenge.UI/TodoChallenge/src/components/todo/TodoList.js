@@ -3,6 +3,7 @@ import Todo from "./Todo";
 import { TodoListModel } from "../../TodoModel";
 import { connect } from "react-redux";
 import { completeTodo, getTodos, TODO_TEXT_CHANGE } from "../../todoActions";
+import dayjs from 'dayjs';
 
 const TodoList = ({ todos, getTodos, onTodoTextChange, onTodoCompleteChange }) => {
     const [filtered, setFiltered] = useState(true);
@@ -16,7 +17,7 @@ const TodoList = ({ todos, getTodos, onTodoTextChange, onTodoCompleteChange }) =
     }, [getTodos]);
 
     const renderTodoList = (todos) => {
-        return todos.filter(filterTodos).map(mapTodoObjectToComponent);
+        return todos.filter(filterTodos).sort((a, b) => dayjs(a.dueDate).diff(b.dueDate, 'd')).map(mapTodoObjectToComponent);
     }
     const filterTodos = (todo) => filtered ? !todo.isComplete : true;
     const mapTodoObjectToComponent = (todo, i) =>

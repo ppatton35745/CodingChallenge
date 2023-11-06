@@ -19,11 +19,14 @@ const TodoAdd = ({ onAddTodo }) => {
         todoSvc.updatePendingTodo(newTodoText);
     }, [newTodoText])
 
-    // const [newTodoType, setNewTodoType] = useState('Optional');
-    // test change
+    const handleThisPlease = (value) => {
+        console.log("handler: ", value);
+    }
+
     return (
         <>
             <input type="text" value={newTodoText} onChange={(e) => setNewTodoText(e.target.value)}></input>
+            <input type="date" onChange={(e) => handleThisPlease(e.target.value)}></input>
             <button className={"btn--default"} onClick={() => {
                 dispatch(addTodo(newTodoText));
             }}>Add</button>
