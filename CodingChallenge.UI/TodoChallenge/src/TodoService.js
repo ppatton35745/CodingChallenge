@@ -1,18 +1,5 @@
 const TODOS_KEY = "todo-data"
-const PENDING_TODO_KEY = "todo-pending"
 const svc = {
-
-    updatePendingTodo: async (todo) => {
-        localStorage.setItem(PENDING_TODO_KEY, JSON.stringify(todo))
-        return Promise.resolve(todo);
-    },
-
-    getPendingTodo: () => {
-        const data = localStorage.getItem(PENDING_TODO_KEY);
-        if (!data) { return Promise.resolve(); }
-        const parsed = JSON.parse(data);
-        return Promise.resolve(parsed);
-    },
 
     getTodos: () => {
         const data = localStorage.getItem(TODOS_KEY);

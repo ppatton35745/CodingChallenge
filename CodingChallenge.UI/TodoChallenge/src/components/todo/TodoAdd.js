@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { addTodo } from '../../todoActions';
-import todoSvc from "../../TodoService";
 import Box from '@mui/material/Box';
 
 const TodoAdd = () => {
@@ -9,17 +8,6 @@ const TodoAdd = () => {
 
     const [newTodoText, setNewTodoText] = useState('');
     const [newTodoDate, setNewTodoDate] = useState('');
-
-    useEffect(() => {
-        todoSvc.getPendingTodo().then(todo => {
-            if (todo)
-                setNewTodoText(todo);
-        })
-    }, [])
-
-    useEffect(() => {
-        todoSvc.updatePendingTodo(newTodoText);
-    }, [newTodoText])
 
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', pb: 2 }}>
