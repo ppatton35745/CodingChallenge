@@ -44,7 +44,7 @@ const Todo = (props) => {
 const TodoEditMode = ({ setEditingText, editingText, saveText, toggleEditText }) => {
     return (
         <>
-            <input onChange={(e) => setEditingText(e.target.value)} value={editingText}></input>
+            <input type="text" onChange={(e) => setEditingText(e.target.value)} value={editingText}></input>
             <IconButton onClick={saveText} className={"btn--default btn--base"}><CheckCircleOutlineIcon /></IconButton>
             <IconButton onClick={toggleEditText} className={"btn--default btn--destructive"}><CancelOutlinedIcon /></IconButton>
         </>
