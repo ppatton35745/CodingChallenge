@@ -22,8 +22,8 @@ const TodoAdd = ({ onAddTodo }) => {
     }, [newTodoText])
 
     return (
-        <Box sx={{ flexDirection: 'column', alignItems: 'center' }}>
-            <Box sx={{ flexDirection: 'row', pl: 0, justifyContent: 'center', alignItems: 'center' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', pb: 2 }}>
+            <Box sx={{ flexDirection: 'row', pb: 1 }}>
                 <input type="text" value={newTodoText} onChange={(e) => setNewTodoText(e.target.value)}></input>
                 <button className={"btn--default"} onClick={() => {
                     console.log("newTodoDate: ", newTodoDate);
@@ -33,7 +33,6 @@ const TodoAdd = ({ onAddTodo }) => {
                 </button>
             </Box>
             <input type="date" value={newTodoDate} onChange={(e) => setNewTodoDate(e.target.value)}></input>
-
         </Box >
     )
 }
