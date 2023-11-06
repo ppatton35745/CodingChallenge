@@ -23,43 +23,41 @@ const Todo = (props) => {
 
     const saveText = () => {
         if (!isEditing) return;
-        props.onTextChange(editingText, props.todo.id);
+        props.onTextChange({ ...props.todo, text: editingText });
         toggleEditText();
     };
-
-    const onChangeEditText = (event) => {
-        setEditingText(event.target.value);
-    }
 
     const getClassName = () => {
         const { isComplete } = props.todo;
         return `todo-item ${isComplete ? 'complete' : 'incomplete'}`;
     }
 
-    const TodoEditMode = () => {
-        return (
-            <>
-                <input onChange={onChangeEditText} value={editingText}></input>
-                <IconButton onClick={saveText} className={"btn--default btn--base"}><CheckCircleOutlineIcon /></IconButton>
-                <IconButton onClick={toggleEditText} className={"btn--default btn--destructive"}><CancelOutlinedIcon /></IconButton>
-            </>
-        )
-    }
-
-    const TodoReadOnlyMode = () => {
-        return (
-            <>
-                {props.todo.text}
-                <IconButton onClick={toggleComplete} className={"btn--default btn--destructive"}><DeleteIcon /></IconButton>
-                <IconButton onClick={toggleEditText} className={"btn--default btn--base"}><ModeEditIcon /></IconButton>
-            </>
-        )
-    }
-
     return (
         <div className={getClassName()}>
-            {isEditing ? <TodoEditMode /> : <TodoReadOnlyMode />}
+            {isEditing ?
+                <TodoEditMode setEditingText={setEditingText} editingText={editingText} saveText={saveText} toggleEditText={toggleEditText} />
+                : <TodoReadOnlyMode text={props.todo.text} toggleComplete={toggleComplete} toggleEditText={toggleEditText} />}
         </div>
+    )
+}
+
+const TodoEditMode = ({ setEditingText, editingText, saveText, toggleEditText }) => {
+    return (
+        <>
+            <input onChange={(e) => setEditingText(e.target.value)} value={editingText}></input>
+            <IconButton onClick={saveText} className={"btn--default btn--base"}><CheckCircleOutlineIcon /></IconButton>
+            <IconButton onClick={toggleEditText} className={"btn--default btn--destructive"}><CancelOutlinedIcon /></IconButton>
+        </>
+    )
+}
+
+const TodoReadOnlyMode = ({ text, toggleComplete, toggleEditText }) => {
+    return (
+        <>
+            {text}
+            <IconButton onClick={toggleComplete} className={"btn--default btn--destructive"}><DeleteIcon /></IconButton>
+            <IconButton onClick={toggleEditText} className={"btn--default btn--base"}><ModeEditIcon /></IconButton>
+        </>
     )
 }
 
