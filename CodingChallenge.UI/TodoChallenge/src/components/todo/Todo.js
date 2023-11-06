@@ -36,7 +36,7 @@ const Todo = (props) => {
         return `todo-item ${isComplete ? 'complete' : 'incomplete'}`;
     }
 
-    const EditModeTodo = () => {
+    const TodoEditMode = () => {
         return (
             <>
                 <input onChange={onChangeEditText} value={editingText}></input>
@@ -46,7 +46,7 @@ const Todo = (props) => {
         )
     }
 
-    const ReadOnlyModeTodo = () => {
+    const TodoReadOnlyMode = () => {
         return (
             <>
                 {props.todo.text}
@@ -58,7 +58,7 @@ const Todo = (props) => {
 
     return (
         <div className={getClassName()}>
-            {isEditing ? <EditModeTodo /> : <ReadOnlyModeTodo />}
+            {isEditing ? <TodoEditMode /> : <TodoReadOnlyMode />}
         </div>
     )
 }
