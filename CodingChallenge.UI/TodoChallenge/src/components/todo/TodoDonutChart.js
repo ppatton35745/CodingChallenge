@@ -11,11 +11,10 @@ const TodoDonutChart = (props) => {
 
     return (
         <PieChart
-            style={{ height: '100px' }}
+            style={{ height: '200px' }}
             data={chartData}
             label={({ dataEntry }) => dataEntry.title}
         />
-
     );
 }
 

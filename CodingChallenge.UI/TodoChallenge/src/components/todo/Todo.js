@@ -12,7 +12,6 @@ const Todo = (props) => {
     const [isEditing, setIsEditing] = useState(false);
     const [editingText, setEditingText] = useState(props.todo.text);
 
-
     const toggleComplete = () => {
         props.onCompleteChange({ ...props.todo, isComplete: !props.todo.isComplete });
     }

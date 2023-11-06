@@ -4,7 +4,7 @@ import { addTodo } from '../../todoActions';
 import todoSvc from "../../TodoService";
 import Box from '@mui/material/Box';
 
-const TodoAdd = ({ onAddTodo }) => {
+const TodoAdd = () => {
     const dispatch = useDispatch();
 
     const [newTodoText, setNewTodoText] = useState('');
@@ -26,7 +26,6 @@ const TodoAdd = ({ onAddTodo }) => {
             <Box sx={{ flexDirection: 'row', pb: 1 }}>
                 <input type="text" value={newTodoText} onChange={(e) => setNewTodoText(e.target.value)}></input>
                 <button className={"btn--default"} onClick={() => {
-                    console.log("newTodoDate: ", newTodoDate);
                     dispatch(addTodo(newTodoText, newTodoDate));
                 }}>
                     Add
