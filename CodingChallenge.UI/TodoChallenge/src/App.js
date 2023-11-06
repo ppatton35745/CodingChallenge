@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoList from "./components/todo/TodoList";
 import TodoAdd from "./components/todo/TodoAdd";
+import TodoDonutChart from './components/todo/TodoDonutChart';
 import "./App.scss";
 import './button.scss';
 
@@ -15,6 +16,7 @@ const App = () => {
         <h1 style={{ margin: 'auto', textAlign: 'center' }}>
           Todo App
         </h1>
+        <TodoDonutChart />
         <TodoAdd />
         <TodoList />
       </Box>
