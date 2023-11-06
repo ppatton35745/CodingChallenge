@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Todo from "./Todo";
 import { TodoListModel } from "../../TodoModel";
 import { connect } from "react-redux";
-import { completeTodo, getTodos, TODO_TEXT_CHANGE } from "../../todoActions";
+import { completeTodo, getTodos, updateTodoText } from "../../todoActions";
 import dayjs from 'dayjs';
 
 const TodoList = ({ todos, getTodos, onTodoTextChange, onTodoCompleteChange }) => {
@@ -48,8 +48,9 @@ TodoList.propTypes = TodoListModel;
 const mapStateToProps = (state) => ({
     todos: state.todos ?? []
 });
+
 const mapDispatchToProps = (dispatch) => ({
-    onTodoTextChange: (text, id) => dispatch({ type: TODO_TEXT_CHANGE, text, id }),
+    onTodoTextChange: (todo) => dispatch(updateTodoText(todo)),
     onTodoCompleteChange: (todo) => dispatch(completeTodo(todo)),
     getTodos: () => dispatch(getTodos())
 });
