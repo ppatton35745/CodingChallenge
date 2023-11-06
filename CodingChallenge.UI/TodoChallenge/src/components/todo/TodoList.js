@@ -17,9 +17,10 @@ const TodoList = ({ todos, getTodos, onTodoTextChange, onTodoCompleteChange }) =
     }, [getTodos]);
 
     const renderTodoList = (todos) => {
-        return todos.filter(filterTodos).sort((a, b) => dayjs(a.dueDate).diff(b.dueDate, 'd')).map(mapTodoObjectToComponent);
+        return todos.filter(filterTodos).sort(sortTodos).map(mapTodoObjectToComponent);
     }
     const filterTodos = (todo) => filtered ? !todo.isComplete : true;
+    const sortTodos = (todoA, todoB) => dayjs(todoA.dueDate).diff(todoB.dueDate, 'd');
     const mapTodoObjectToComponent = (todo, i) =>
     (
         <Todo
